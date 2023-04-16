@@ -12,13 +12,14 @@ options = webdriver.FirefoxOptions()
 options.add_argument('--headless')
 driver = webdriver.Firefox(options=options)
 
-url = input("siteyi yaz: ")
+url = input("Siteyi yazınız (Konunun ilk sayfasını açın ve linki kopyalayıp yapıştırın): ")
 sayfa_sayisi = int(input("Konu kaç sayfa: "))
 b= 1
 ad_liste = []
 
 
 for c in range(1,sayfa_sayisi+1):
+    print(f"sayfa {b} kontrol ediliyor...")
     driver.get(f"{url}-{b}")
     time.sleep(3)
     tum = driver.find_elements(By.CSS_SELECTOR, "article > aside")
@@ -29,16 +30,18 @@ for c in range(1,sayfa_sayisi+1):
         except:
             pass
     b +=1
-
+print("Kontrol tamamlandı...")
 
 konu_sahibi = ad_liste[0]
 # Tekrarlanan kullanıcıları siler
 benzersizListem = benzersiz(ad_liste)
 #konu sahibini siler
 benzersizListem.remove(konu_sahibi)
+print("Konu sahibi listeden kaldırıldı")
 üyeler = '\n'.join(benzersizListem)
 # konuya mesaj yazanları konu sahibi hariç uye.txt dosyasına yazdırır
 with open("uye.txt","w",encoding="utf-8") as f:
     f.write(üyeler)
+print("üye.txt dosyasına kullanıcılar yazdırıldı (banlananlar dahil)")
 
 driver.quit()
