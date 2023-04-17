@@ -19,7 +19,7 @@ ad_liste = []
 
 
 for c in range(1,sayfa_sayisi+1):
-    print(f"sayfa {b} kontrol ediliyor...")
+    print(f"Sayfa {b} kontrol ediliyor...")
     driver.get(f"{url}-{b}")
     time.sleep(3)
     tum = driver.find_elements(By.CSS_SELECTOR, "article > aside")
@@ -42,6 +42,6 @@ print("Konu sahibi listeden kaldırıldı")
 # konuya mesaj yazanları konu sahibi hariç uye.txt dosyasına yazdırır
 with open("uye.txt","w",encoding="utf-8") as f:
     f.write(üyeler)
-print("üye.txt dosyasına kullanıcılar yazdırıldı (banlananlar dahil)")
+print("uye.txt dosyasına kullanıcılar yazdırıldı (banlananlar dahil)")
 
 driver.quit()
